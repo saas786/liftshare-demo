@@ -9,7 +9,7 @@
           v-on:endLocChanged="setEndLoc"
         />
 
-        <div class="text-left text-sm mt-6">Departure Date:</div>
+        <div class="text-left text-sm mt-4">Departure Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
           :state="startValidationState.value"
@@ -26,7 +26,7 @@
         >
           Must be in the present!
         </div>
-        <div class="text-left text-sm mt-6">Return Date:</div>
+        <div class="text-left text-sm mt-4">Return Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
           :state="endValidationState.value"
@@ -47,7 +47,7 @@
         <button
           data-testid="btn-save-planet"
           :class="{ [saveEnabled ? 'btn-green' : 'btn-disabled']: true }"
-          class="my-6 float-right inline-flex items-center"
+          class="my-8 float-right inline-flex items-center"
           type="button"
           v-on:click="save"
           :disabled="!saveEnabled"

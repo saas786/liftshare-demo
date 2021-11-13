@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-left text-sm mt-6">Start of Journey:</div>
+    <div class="text-left text-sm mt-4">Start of Journey:</div>
     <div class="mt-1">
       <GMapAutocomplete
         placeholder="Start of Journey"
@@ -9,7 +9,7 @@
       >
       </GMapAutocomplete>
     </div>
-    <div class="text-left text-sm mt-6">End of Journey:</div>
+    <div class="text-left text-sm mt-4">End of Journey:</div>
     <div class="mt-1">
       <GMapAutocomplete
         placeholder="End of Journey"
