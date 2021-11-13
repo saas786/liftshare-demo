@@ -3,7 +3,6 @@ import App from "./../src/App.vue";
 import fetchMock from "jest-fetch-mock";
 
 jest.mock("./../src/components/LocationInput.vue");
-
 jest.mock("./../src/components/GoogleMap.vue");
 
 const dateNow = new Date();
@@ -48,14 +47,14 @@ describe("App", () => {
         template: "<div class='stub'></div>",
       };
 
-      const wrapper = mount(App, {});
+      const wrapper = mount(App);
 
       // Couldn't get these to work!!
       const spySaveMethod = jest.spyOn(wrapper.vm, "save");
       const spyValidateDatesMethod = jest.spyOn(wrapper.vm, "validateDates");
 
-      wrapper.vm.validateDates = spyValidateDatesMethod;
-      wrapper.vm.save = spySaveMethod;
+      wrapper.vm.validateDates = jest.fn(); //spyValidateDatesMethod;
+      wrapper.vm.save = jest.fn(); //spySaveMethod;
 
       wrapper.vm.markers.push(startLoc);
       wrapper.vm.markers.push(endLoc);
@@ -71,6 +70,8 @@ describe("App", () => {
         expectedStartValidationState
       );
       expect(wrapper.vm.endValidationState).toEqual(expectedEndValidationState);
+
+      expect(spyValidateDatesMethod).toHaveBeenCalledTimes(2);
     }
   );
 });
