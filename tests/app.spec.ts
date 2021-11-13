@@ -3,7 +3,7 @@ import App from "./../src/App.vue";
 import fetchMock from "jest-fetch-mock";
 
 describe("App", () => {
-  it("save executed when I click save", async () => {
+  it("executes save when I have valid data and click save", async () => {
     // Arrange
     const startLoc = {
       position: {

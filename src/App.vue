@@ -48,6 +48,7 @@
           :processing="saveProcessing"
           @click="save"
           data-testid="save-button"
+          :text="'Save Planet!'"
         />
       </div>
     </div>

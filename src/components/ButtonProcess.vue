@@ -6,7 +6,7 @@
     type="button"
     :disabled="disabled"
   >
-    <span>Save Planet!</span>
+    <span>{{ text }}</span>
     <svg
       v-if="processing"
       class="animate-spin -mr-1 ml-3 h-5 w-5 text-white"
@@ -33,9 +33,9 @@
 
 <script setup lang="ts">
 interface ButtonProcessProps {
+  text: string;
   processing: boolean;
   disabled: boolean;
-  //click: ((payload: MouseEvent) => void) | undefined;
 }
 
 const props = defineProps<ButtonProcessProps>();
