@@ -5,7 +5,7 @@ export interface PositionType {
 }
 
 export interface MarkerType {
-  position: PositionType | null;
+  position?: PositionType;
 }
 
 export interface GoogleMapProps {

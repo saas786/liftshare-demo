@@ -75,25 +75,31 @@ import DateTimePicker from "./components/DateTimePicker.vue";
 import { createToast } from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
 
+interface DateTimeType {
+  value?: Date;
+}
+
+interface ValidationType {
+  value?: boolean;
+}
+
 const markers: MarkerType[] = reactive<MarkerType[]>([] as MarkerType[]);
-const startDateTime: { value: Date | undefined } = reactive<{
-  value: Date | undefined;
-}>({ value: undefined });
-const endDateTime: { value: Date | undefined } = reactive<{
-  value: Date | undefined;
-}>({ value: undefined });
-const startValidationState: { value: boolean | undefined } = reactive<{
-  value: boolean | undefined;
-}>({ value: undefined });
-const endValidationState: { value: boolean | undefined } = reactive<{
-  value: boolean | undefined;
-}>({ value: undefined });
+const startDateTime: DateTimeType = reactive<DateTimeType>({
+  value: undefined,
+});
+const endDateTime: DateTimeType = reactive<DateTimeType>({ value: undefined });
+const startValidationState: ValidationType = reactive<ValidationType>({
+  value: undefined,
+});
+const endValidationState: ValidationType = reactive<ValidationType>({
+  value: undefined,
+});
 
 const setStartLoc = (loc: PositionType) => {
   if (loc && markers) {
     markers[0] = { position: loc };
   } else {
-    markers[0].position = null;
+    markers[0].position = undefined;
   }
 };
 
@@ -101,7 +107,7 @@ const setEndLoc = (loc: PositionType) => {
   if (loc && markers) {
     markers[1] = { position: loc };
   } else {
-    markers[1].position = null;
+    markers[1].position = undefined;
   }
 };
 
