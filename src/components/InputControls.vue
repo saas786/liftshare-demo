@@ -27,6 +27,7 @@ const emit = defineEmits(["startLocChanged", "endLocChanged"]);
 const startLocChanged = (place: google.maps.places.PlaceResult) => {
   if (place && place.geometry && place.geometry.location) {
     emit("startLocChanged", {
+      text: place.formatted_address,
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
     });
@@ -38,6 +39,7 @@ const startLocChanged = (place: google.maps.places.PlaceResult) => {
 const endLocChanged = (place: google.maps.places.PlaceResult) => {
   if (place && place.geometry && place.geometry.location) {
     emit("endLocChanged", {
+      text: place.formatted_address,
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
     });

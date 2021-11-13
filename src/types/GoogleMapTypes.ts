@@ -1,4 +1,5 @@
 export interface PositionType {
+  text: string;
   lat: number;
   lng: number;
 }

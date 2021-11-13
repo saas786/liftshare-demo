@@ -41,12 +41,22 @@
   .input-field {
     @apply px-2 py-2;
   }
-
   .btn-common {
-    @apply text-white font-bold py-1 px-2 rounded focus:outline-none;
+    @apply text-white font-bold py-1 px-3 rounded focus:outline-none;
   }
 
-  .btn--green {
+  .btn-green {
     @apply bg-green-500 hover:bg-green-700 btn-common;
+  }
+
+  .btn-disabled {
+    @apply cursor-not-allowed bg-gray-300 btn-common;
+  }
+
+  .loader {
+    @apply border-green-500;
+    /* border-top-color: #5bdb34ec; */
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
   }
 }
