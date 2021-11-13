@@ -44,21 +44,6 @@ export function fitToBounds(googleMap: google.maps.Map, markers: MarkerType[]) {
   }
 }
 
-// export function roundTimeQuarterHour(time: Date | null) {
-//   if (time) {
-//     var timeToReturn = new Date(time);
-
-//     timeToReturn.setMilliseconds(
-//       Math.round(timeToReturn.getMilliseconds() / 1000) * 1000
-//     );
-//     timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
-//     timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 15) * 15);
-//     return timeToReturn;
-//   } else {
-//     return null;
-//   }
-// }
-
 export const format = (date: Date) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;

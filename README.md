@@ -1,3 +1,21 @@
+# Welcome to the save the planet demo
+
+In order to run the demo you'll need a `.env.local` file in the root of the project with the following contents
+
+    `VITE_GOOGLE_API_KEY=<Your-Google-Maps-Api-Key>`
+
+To install run
+
+    `$ npm install`
+
+To run the tests run
+
+    `$ npm run test`
+
+To spin up a local server run
+
+    `$ npm run dev`
+
 # Vue 3 + Typescript + Vite
 
 This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.

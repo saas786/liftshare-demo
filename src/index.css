@@ -55,7 +55,6 @@
 
   .loader {
     @apply border-green-500;
-    /* border-top-color: #5bdb34ec; */
     -webkit-animation: spinner 1.5s linear infinite;
     animation: spinner 1.5s linear infinite;
   }
