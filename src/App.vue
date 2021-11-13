@@ -4,7 +4,7 @@
   >
     <div class="w-fixed w-full flex-shrink flex-grow-0 px-4">
       <div class="p-4 w-full h-full mb-6">
-        <InputControls
+        <LocationInput
           v-on:startLocChanged="setStartLoc"
           v-on:endLocChanged="setEndLoc"
         />
@@ -43,38 +43,11 @@
         >
           Must be after start time!
         </div>
-
-        <button
-          data-testid="btn-save-planet"
-          :class="{ [saveEnabled ? 'btn-green' : 'btn-disabled']: true }"
-          class="my-8 float-right inline-flex items-center"
-          type="button"
-          v-on:click="save"
-          :disabled="!saveEnabled"
-        >
-          <span>Save Planet!</span>
-          <svg
-            v-if="processing"
-            class="animate-spin -mr-1 ml-3 h-5 w-5 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            ></circle>
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-        </button>
+        <ButtonProcess
+          :disabled="saveDisabled"
+          :processing="saveProcessing"
+          :onClick="save"
+        />
       </div>
     </div>
     <main class="w-full flex-grow">
@@ -93,8 +66,9 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
 import { MarkerType, PositionType } from "./types/GoogleMapTypes";
+import ButtonProcess from "./components/ButtonProcess.vue";
 import GoogleMap from "./components/GoogleMap.vue";
-import InputControls from "./components/InputControls.vue";
+import LocationInput from "./components/LocationInput.vue";
 import DateTimePicker from "./components/DateTimePicker.vue";
 import { createToast } from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
@@ -164,23 +138,25 @@ const setEndDateTime = (date: Date) => {
   validateDates();
 };
 
-let processing = ref(false);
+let saveProcessing = ref(false);
 
-const saveEnabled = computed(
+const saveDisabled = computed(
   () =>
-    startDateTime &&
-    startDateTime.value &&
-    endDateTime &&
-    endDateTime.value &&
-    markers &&
-    markers.length > 1 &&
-    markers[0].position &&
-    markers[1].position &&
-    !processing.value
+    !(
+      startDateTime &&
+      startDateTime.value &&
+      endDateTime &&
+      endDateTime.value &&
+      markers &&
+      markers.length > 1 &&
+      markers[0].position &&
+      markers[1].position &&
+      !saveProcessing.value
+    )
 );
 
 const save = () => {
-  processing.value = true;
+  saveProcessing.value = true;
 
   const body = {
     journey_start: {
@@ -200,18 +176,17 @@ const save = () => {
       return res.json();
     })
     .then((data) => {
-      processing.value = false;
       createToast("Planet Saved!", {
         type: "success",
         toastBackgroundColor: "#11b981",
       });
     })
     .catch((err) => {
-      processing.value = false;
       createToast("Planet Not Saved!", {
         type: "danger",
       });
-    });
+    })
+    .finally(() => (saveProcessing.value = false));
 };
 </script>
 
@@ -227,25 +202,5 @@ export default defineComponent({});
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-</style>
-
-<style>
-@-webkit-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>

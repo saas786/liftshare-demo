@@ -18,7 +18,7 @@ export function makeServer({ environment = "development" } = {}) {
             )}`,
           });
         },
-        { timing: 1000 }
+        { timing: 2500 }
       );
     },
   });

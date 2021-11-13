@@ -23,7 +23,8 @@ interface DatePickerProps {
 const props = withDefaults(defineProps<DatePickerProps>(), {
   // Date should be blank when form loads
   date: undefined,
-  // Formatter for English style dates
+  // Formatter for en_GB style dates
+  // FIXME: use user's locale
   format: (date: Date) => format(date),
   // Validation state should be 'undefined' when form loads
   // i.e. the state has no effect (true gives green border,
@@ -33,6 +34,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 
 const emit = defineEmits(["dateUpdated"]);
 
+// FIXME: wrap the date object and watch that,
+// watching entire props prob not necessary
 watch(props, (newProp) => {
   emit("dateUpdated", newProp.date);
 });
