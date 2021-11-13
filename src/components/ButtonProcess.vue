@@ -4,7 +4,6 @@
     :class="{ [disabled ? 'btn-disabled' : 'btn-green']: true }"
     class="my-8 float-right inline-flex items-center"
     type="button"
-    v-on:click="onClick"
     :disabled="disabled"
   >
     <span>Save Planet!</span>
@@ -36,7 +35,7 @@
 interface ButtonProcessProps {
   processing: boolean;
   disabled: boolean;
-  onClick: ((payload: MouseEvent) => void) | undefined;
+  //click: ((payload: MouseEvent) => void) | undefined;
 }
 
 const props = defineProps<ButtonProcessProps>();

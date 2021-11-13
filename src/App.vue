@@ -46,7 +46,8 @@
         <ButtonProcess
           :disabled="saveDisabled"
           :processing="saveProcessing"
-          :onClick="save"
+          @click="save"
+          data-testid="save-button"
         />
       </div>
     </div>

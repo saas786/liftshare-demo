@@ -1,4 +1,4 @@
-import { GoogleMapProps, MarkerType } from "../types/GoogleMapTypes";
+import { MarkerType } from "../types/GoogleMapTypes";
 
 export function centerMap(
   googleMap: google.maps.Map,
