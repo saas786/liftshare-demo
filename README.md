@@ -2,19 +2,19 @@
 
 In order to run the demo you'll need a `.env.local` file in the root of the project with the following contents
 
-    `VITE_GOOGLE_API_KEY=<Your-Google-Maps-Api-Key>`
+    VITE_GOOGLE_API_KEY=<Your-Google-Maps-Api-Key>
 
-To install run
+To install npm modules run
 
-    `$ npm install`
+    $ npm install
 
 To run the tests run
 
-    `$ npm run test`
+    $ npm run test
 
 To spin up a local server run
 
-    `$ npm run dev`
+    $ npm run dev
 
 # Vue 3 + Typescript + Vite
 
