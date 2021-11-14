@@ -47,11 +47,13 @@ describe("App", () => {
         template: "<div class='stub'></div>",
       };
 
-      const wrapper = mount(App);
+      const wrapper = shallowMount(App);
 
       // Couldn't get these to work!!
       const spySaveMethod = jest.spyOn(wrapper.vm, "save");
       const spyValidateDatesMethod = jest.spyOn(wrapper.vm, "validateDates");
+      const spySetStartDateTime = jest.spyOn(wrapper.vm, "setStartDateTime");
+      const spyEndStartDateTime = jest.spyOn(wrapper.vm, "setEndDateTime");
 
       wrapper.vm.validateDates = spyValidateDatesMethod;
       wrapper.vm.save = spySaveMethod;
