@@ -12,34 +12,26 @@
         <div class="text-left text-sm mt-4">Departure Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
-          :state="startValidationState.value"
+          :state="startValidationState.value ? undefined : false"
           :date="startDateTime"
           v-on:dateUpdated="setStartDateTime"
         />
         <div
           class="text-right text-red-400 text-sm"
-          v-if="
-            startValidationState.value === undefined
-              ? false
-              : !startValidationState.value
-          "
+          v-if="!startValidationState.value"
         >
           Must be in the present!
         </div>
         <div class="text-left text-sm mt-4">Return Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
-          :state="endValidationState.value"
+          :state="endValidationState.value ? undefined : false"
           :date="endDateTime"
           v-on:dateUpdated="setEndDateTime"
         />
         <div
           class="text-right text-red-400 text-sm"
-          v-if="
-            endValidationState.value === undefined
-              ? false
-              : !endValidationState.value
-          "
+          v-if="!endValidationState.value"
         >
           Must be after start time!
         </div>
@@ -83,10 +75,10 @@ const startDateTime: DateTimeType = reactive<DateTimeType>({
 });
 const endDateTime: DateTimeType = reactive<DateTimeType>({ value: undefined });
 const startValidationState: ValidationType = reactive<ValidationType>({
-  value: undefined,
+  value: true,
 });
 const endValidationState: ValidationType = reactive<ValidationType>({
-  value: undefined,
+  value: true,
 });
 
 const setStartLoc = (loc: PositionType) => {
@@ -114,7 +106,7 @@ const validateDates = () => {
   ) {
     startValidationState.value = false;
   } else {
-    startValidationState.value = undefined;
+    startValidationState.value = true;
   }
   // Validate end datetime
   if (
@@ -126,7 +118,7 @@ const validateDates = () => {
   ) {
     endValidationState.value = false;
   } else {
-    endValidationState.value = undefined;
+    endValidationState.value = true;
   }
 };
 
@@ -153,8 +145,8 @@ const saveDisabled = computed(
       markers.length > 1 &&
       markers[0].position &&
       markers[1].position &&
-      !(endValidationState.value === false) &&
-      !(startValidationState.value === false) &&
+      endValidationState.value &&
+      startValidationState.value &&
       !saveProcessing.value
     )
 );
