@@ -3,38 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  @media (min-width: 640px) {
-    .w-fixed {
-      flex: 0 1 400px;
-      min-width: 400px;
-    }
-  }
-
-  /* had issue with gmap library styles, this fixes it */
-  .vue-map {
-    @apply min-h-screen !important;
-  }
-
-  /* styles for date picker */
-  .dp__theme_light {
-    --dp-background-color: #ffffff;
-    --dp-text-color: rgba(55, 65, 81, 1);
-    --dp-hover-color: #f3f3f3;
-    --dp-hover-text-color: #212121;
-    --dp-hover-icon-color: #959595;
-    --dp-primary-color: #1976d2;
-    --dp-primary-text-color: #f8f5f5;
-    --dp-secondary-color: #c0c4cc;
-    --dp-border-color: rgba(229, 231, 235, 1);
-    --dp-border-color-hover: rgba(209, 213, 219, 1);
-    --dp-disabled-color: #f6f6f6;
-    --dp-scroll-bar-background: #f3f3f3;
-    --dp-scroll-bar-color: #959595;
-    --dp-success-color: #76d275;
-    --dp-icon-color: #959595;
-    --dp-danger-color: #ff6f60;
-  }
-
   .input-rounded {
     @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none hover:border-gray-300;
   }

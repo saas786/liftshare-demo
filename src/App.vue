@@ -204,5 +204,12 @@ export default defineComponent({});
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  @media (min-width: 640px) {
+    .w-fixed {
+      flex: 0 1 400px;
+      min-width: 400px;
+    }
+  }
 }
 </style>
