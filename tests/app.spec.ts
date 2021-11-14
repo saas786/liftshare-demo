@@ -12,12 +12,12 @@ const day = 60 * 60 * 24 * 1000;
 describe("App", () => {
   test.each`
     startDateTime                            | expectedStartValidationState | endDateTime                              | expectedEndValidationState
-    ${new Date(dateNow.getTime() + 2 * day)} | ${{ value: undefined }}      | ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: undefined }}
-    ${new Date(dateNow.getTime() - 2 * day)} | ${{ value: false }}          | ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: undefined }}
-    ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: undefined }}      | ${new Date(dateNow.getTime() + 2 * day)} | ${{ value: false }}
+    ${new Date(dateNow.getTime() + 2 * day)} | ${{ value: true }}           | ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: true }}
+    ${new Date(dateNow.getTime() - 2 * day)} | ${{ value: false }}          | ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: true }}
+    ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: true }}           | ${new Date(dateNow.getTime() + 2 * day)} | ${{ value: false }}
     ${new Date(dateNow.getTime() - 2 * day)} | ${{ value: false }}          | ${new Date(dateNow.getTime() - 7 * day)} | ${{ value: false }}
   `(
-    "returns $expectedToBeCalledTimes when $startDateTime and $endDateTime used to save",
+    "validation start:$expectedStartValidationState end:$expectedEndValidationState when $startDateTime and $endDateTime used to save with valid location",
     async ({
       startDateTime,
       expectedStartValidationState,
