@@ -34,6 +34,7 @@
     --dp-icon-color: #959595;
     --dp-danger-color: #ff6f60;
   }
+
   .input-rounded {
     @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none hover:border-gray-300;
   }
@@ -48,11 +49,5 @@
 
   .btn-disabled {
     @apply cursor-not-allowed bg-gray-300 btn-common;
-  }
-
-  .loader {
-    @apply border-green-500;
-    -webkit-animation: spinner 1.5s linear infinite;
-    animation: spinner 1.5s linear infinite;
   }
 }
