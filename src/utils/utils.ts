@@ -21,7 +21,7 @@ export function fitToBounds(googleMap: google.maps.Map, markers: MarkerType[]) {
   if (markers.length > 1) {
     if (startDefined && endDefined) {
       // both are defined
-      for (var i = 0; i < markers.length; i++) {
+      for (let i = 0; i < markers.length; i++) {
         const latLng = new google.maps.LatLng(
           markers[i].position!.lat,
           markers[i].position!.lng
