@@ -17,7 +17,7 @@ describe("App", () => {
     ${new Date(dateNow.getTime() + 7 * day)} | ${{ value: true }}           | ${new Date(dateNow.getTime() + 2 * day)} | ${{ value: false }}
     ${new Date(dateNow.getTime() - 2 * day)} | ${{ value: false }}          | ${new Date(dateNow.getTime() - 7 * day)} | ${{ value: false }}
   `(
-    "validation start:$expectedStartValidationState end:$expectedEndValidationState when $startDateTime and $endDateTime used to save with valid location",
+    "validation startValidationState:$expectedStartValidationState endValidationState:$expectedEndValidationState when $startDateTime and $endDateTime used to save with valid location",
     async ({
       startDateTime,
       expectedStartValidationState,
