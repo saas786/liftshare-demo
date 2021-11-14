@@ -57,7 +57,7 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({});
 </script>
 
-<style scoped lang="postcss">
+<style lang="postcss">
 .vue-map {
   @apply min-h-screen !important;
 }
