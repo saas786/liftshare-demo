@@ -153,6 +153,8 @@ const saveDisabled = computed(
       markers.length > 1 &&
       markers[0].position &&
       markers[1].position &&
+      !(endValidationState.value === false) &&
+      !(startValidationState.value === false) &&
       !saveProcessing.value
     )
 );
