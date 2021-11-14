@@ -2,7 +2,7 @@ import { mount, shallowMount } from "@vue/test-utils";
 import App from "./../src/App.vue";
 import fetchMock from "jest-fetch-mock";
 
-jest.mock("./../src/components/LocationInput.vue");
+jest.mock("./../src/components/InputLocation.vue");
 jest.mock("./../src/components/GoogleMap.vue");
 
 const dateNow = new Date();

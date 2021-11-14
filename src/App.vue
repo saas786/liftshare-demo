@@ -4,7 +4,7 @@
   >
     <div class="w-fixed w-full flex-shrink flex-grow-0 px-4">
       <div class="p-4 w-full h-full mb-6">
-        <LocationInput
+        <InputLocation
           v-on:startLocChanged="setStartLoc"
           v-on:endLocChanged="setEndLoc"
         />
@@ -13,7 +13,7 @@
         <DateTimePicker
           class="mt-1 mb-1"
           :state="startValidationState.value"
-          :date="startDateTime.value"
+          :date="startDateTime"
           v-on:dateUpdated="setStartDateTime"
         />
         <div
@@ -30,7 +30,7 @@
         <DateTimePicker
           class="mt-1 mb-1"
           :state="endValidationState.value"
-          :date="endDateTime.value"
+          :date="endDateTime"
           v-on:dateUpdated="setEndDateTime"
         />
         <div
@@ -70,18 +70,12 @@ import { computed, reactive, ref } from "vue";
 import { MarkerType, PositionType } from "./types/GoogleMapTypes";
 import ButtonProcess from "./components/ButtonProcess.vue";
 import GoogleMap from "./components/GoogleMap.vue";
-import LocationInput from "./components/LocationInput.vue";
+import InputLocation from "./components/InputLocation.vue";
 import DateTimePicker from "./components/DateTimePicker.vue";
 import { createToast } from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
-
-interface DateTimeType {
-  value?: Date;
-}
-
-interface ValidationType {
-  value?: boolean;
-}
+import { DateTimeType } from "./types/DateTimeTypes";
+import { ValidationType } from "./types/ValidationTypes";
 
 const markers: MarkerType[] = reactive<MarkerType[]>([] as MarkerType[]);
 const startDateTime: DateTimeType = reactive<DateTimeType>({
@@ -146,7 +140,7 @@ const setEndDateTime = (date: Date) => {
   validateDates();
 };
 
-let saveProcessing = ref(false);
+const saveProcessing = ref(false);
 
 const saveDisabled = computed(
   () =>

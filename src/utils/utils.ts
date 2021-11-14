@@ -44,14 +44,17 @@ export function fitToBounds(googleMap: google.maps.Map, markers: MarkerType[]) {
   }
 }
 
-export const format = (date: Date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const time = date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+export const format = (date: Date | undefined) => {
+  if (date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const time = date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
-  return `${day}/${month}/${year}    ${time}`;
+    return `${day}/${month}/${year}    ${time}`;
+  }
+  return "";
 };

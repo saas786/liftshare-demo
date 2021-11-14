@@ -1,6 +1,6 @@
 <template>
   <Datepicker
-    v-model="date"
+    v-model="date.value"
     locale="en-GB"
     minutesIncrement="1"
     :format="format"
@@ -10,22 +10,25 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
+import { watch, reactive } from "vue";
 import { format } from "../utils/utils";
+import { DateTimeType } from "../types/DateTimeTypes";
 
 // This interface can't be extracted to file yet: https://github.com/vuejs/vue-next/issues/4294
 interface DatePickerProps {
-  date?: Date;
+  date: DateTimeType;
   format?: Function;
   state?: boolean;
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   // Date should be blank when form loads
-  date: undefined,
+  date: () => {
+    return { value: undefined };
+  },
   // Formatter for en_GB style dates
   // FIXME: use user's locale
-  format: (date: Date) => format(date),
+  format: (date: DateTimeType) => format(date.value),
   // Validation state should be 'undefined' when form loads
   // i.e. the state has no effect (true gives green border,
   // false gives red border to input component)
@@ -34,11 +37,13 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 
 const emit = defineEmits(["dateUpdated"]);
 
-// FIXME: wrap the date object and watch that,
-// watching entire props prob not necessary
-watch(props, (newProp) => {
-  emit("dateUpdated", newProp.date);
-});
+watch(
+  props.date,
+  (newDate) => {
+    emit("dateUpdated", newDate.value);
+  },
+  { deep: true }
+);
 </script>
 
 <script lang="ts">
