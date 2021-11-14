@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, reactive } from "vue";
+import { watch } from "vue";
 import { format } from "../utils/utils";
 import { DateTimeType } from "../types/DateTimeTypes";
 

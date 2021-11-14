@@ -1,3 +1,3 @@
 export interface ValidationType {
-  value: boolean | undefined;
+  value?: boolean;
 }

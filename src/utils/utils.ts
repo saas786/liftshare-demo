@@ -44,7 +44,7 @@ export function fitToBounds(googleMap: google.maps.Map, markers: MarkerType[]) {
   }
 }
 
-export const format = (date: Date | undefined) => {
+export const format = (date?: Date) => {
   if (date) {
     const day = date.getDate();
     const month = date.getMonth() + 1;

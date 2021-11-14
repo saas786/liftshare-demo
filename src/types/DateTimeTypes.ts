@@ -1,5 +1,5 @@
 export interface DateTimeType {
-  value: Date | undefined;
+  value?: Date;
 }
 
 export interface DatePickerProps {
