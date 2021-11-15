@@ -143,7 +143,9 @@ const saveDisabled = computed(
       endDateTime.value &&
       markers &&
       markers.length > 1 &&
+      markers[0] &&
       markers[0].position &&
+      markers[1] &&
       markers[1].position &&
       endValidationState.value &&
       startValidationState.value &&
