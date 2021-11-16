@@ -111,7 +111,7 @@ const validateDates = () => {
   }
 };
 
-watch([startDateTime, endDateTime], (newDate) => {
+watch([startDateTime, endDateTime], () => {
   validateDates();
 });
 
