@@ -12,27 +12,22 @@
         <div class="text-left text-sm mt-4">Departure Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
-          :state="startValidationState.value ? undefined : false"
-          :date="startDateTime"
+          :state="startValidationState ? undefined : false"
           v-on:dateUpdated="setStartDateTime"
         />
         <div
           class="text-right text-red-400 text-sm"
-          v-if="!startValidationState.value"
+          v-if="!startValidationState"
         >
           Must be in the present!
         </div>
         <div class="text-left text-sm mt-4">Return Date:</div>
         <DateTimePicker
           class="mt-1 mb-1"
-          :state="endValidationState.value ? undefined : false"
-          :date="endDateTime"
+          :state="endValidationState ? undefined : false"
           v-on:dateUpdated="setEndDateTime"
         />
-        <div
-          class="text-right text-red-400 text-sm"
-          v-if="!endValidationState.value"
-        >
+        <div class="text-right text-red-400 text-sm" v-if="!endValidationState">
           Must be after start time!
         </div>
         <ButtonProcess
@@ -58,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, Ref, ref } from "vue";
 import { MarkerType, PositionType } from "./types/GoogleMapTypes";
 import ButtonProcess from "./components/ButtonProcess.vue";
 import GoogleMap from "./components/GoogleMap.vue";
@@ -70,16 +65,10 @@ import { DateTimeType } from "./types/DateTimeTypes";
 import { ValidationType } from "./types/ValidationTypes";
 
 const markers: MarkerType[] = reactive<MarkerType[]>([] as MarkerType[]);
-const startDateTime: DateTimeType = reactive<DateTimeType>({
-  value: undefined,
-});
-const endDateTime: DateTimeType = reactive<DateTimeType>({ value: undefined });
-const startValidationState: ValidationType = reactive<ValidationType>({
-  value: true,
-});
-const endValidationState: ValidationType = reactive<ValidationType>({
-  value: true,
-});
+const startDateTime: Ref<Date | undefined> = ref<Date | undefined>(undefined);
+const endDateTime: Ref<Date | undefined> = ref<Date | undefined>(undefined);
+let startValidationState: Ref<boolean> = ref<boolean>(true);
+let endValidationState: Ref<boolean> = ref<boolean>(true);
 
 const setStartLoc = (loc: PositionType) => {
   if (loc && markers) {

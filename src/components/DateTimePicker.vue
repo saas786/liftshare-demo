@@ -10,22 +10,21 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
+import { Ref, watch } from "vue";
 import { format } from "../utils/utils";
 import { DateTimeType } from "../types/DateTimeTypes";
 
 // This interface can't be extracted to file yet: https://github.com/vuejs/vue-next/issues/4294
 interface DatePickerProps {
-  date: DateTimeType;
+  date?: Ref<Date | undefined>;
   format?: Function;
   state?: boolean;
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   // Date should be blank when form loads
-  date: () => {
-    return { value: undefined };
-  },
+  date: () => ref(undefined),
+
   // Formatter for en_GB style dates
   // FIXME: use user's locale
   format: (date: DateTimeType) => format(date.value),
@@ -40,7 +39,7 @@ const emit = defineEmits(["dateUpdated"]);
 watch(
   props.date,
   (newDate) => {
-    emit("dateUpdated", newDate.value);
+    emit("dateUpdated", newDate);
   },
   { deep: true }
 );
