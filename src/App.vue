@@ -13,7 +13,7 @@
         <DateTimePicker
           class="mt-1 mb-1"
           :state="startValidationState ? undefined : false"
-          v-on:dateUpdated="setStartDateTime"
+          v-model:date="startDateTime"
         />
         <div
           class="text-right text-red-400 text-sm"
@@ -25,7 +25,7 @@
         <DateTimePicker
           class="mt-1 mb-1"
           :state="endValidationState ? undefined : false"
-          v-on:dateUpdated="setEndDateTime"
+          v-model:date="endDateTime"
         />
         <div class="text-right text-red-400 text-sm" v-if="!endValidationState">
           Must be after start time!
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, Ref, ref } from "vue";
+import { computed, reactive, Ref, ref, watch } from "vue";
 import { MarkerType, PositionType } from "./types/GoogleMapTypes";
 import ButtonProcess from "./components/ButtonProcess.vue";
 import GoogleMap from "./components/GoogleMap.vue";
@@ -65,8 +65,8 @@ import { DateTimeType } from "./types/DateTimeTypes";
 import { ValidationType } from "./types/ValidationTypes";
 
 const markers: MarkerType[] = reactive<MarkerType[]>([] as MarkerType[]);
-const startDateTime: Ref<Date | undefined> = ref<Date | undefined>(undefined);
-const endDateTime: Ref<Date | undefined> = ref<Date | undefined>(undefined);
+const startDateTime: Ref<Date | null> = ref<Date | null>(null);
+const endDateTime: Ref<Date | null> = ref<Date | null>(null);
 let startValidationState: Ref<boolean> = ref<boolean>(true);
 let endValidationState: Ref<boolean> = ref<boolean>(true);
 
@@ -111,15 +111,9 @@ const validateDates = () => {
   }
 };
 
-const setStartDateTime = (date: Date) => {
-  startDateTime.value = date;
+watch([startDateTime, endDateTime], (newDate) => {
   validateDates();
-};
-
-const setEndDateTime = (date: Date) => {
-  endDateTime.value = date;
-  validateDates();
-};
+});
 
 const saveProcessing = ref(false);
 

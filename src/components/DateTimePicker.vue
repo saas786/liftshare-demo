@@ -1,11 +1,11 @@
 <template>
   <Datepicker
-    v-model="date.value"
     locale="en-GB"
     minutesIncrement="1"
     :format="format"
     :previewFormat="format"
     :state="state"
+    @update:modelValue="$emit('update:date', $event)"
   ></Datepicker>
 </template>
 
@@ -16,15 +16,12 @@ import { DateTimeType } from "../types/DateTimeTypes";
 
 // This interface can't be extracted to file yet: https://github.com/vuejs/vue-next/issues/4294
 interface DatePickerProps {
-  date?: Ref<Date | undefined>;
+  date: Date | null;
   format?: Function;
   state?: boolean;
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
-  // Date should be blank when form loads
-  date: () => ref(undefined),
-
   // Formatter for en_GB style dates
   // FIXME: use user's locale
   format: (date: DateTimeType) => format(date.value),
@@ -34,15 +31,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   state: undefined,
 });
 
-const emit = defineEmits(["dateUpdated"]);
-
-watch(
-  props.date,
-  (newDate) => {
-    emit("dateUpdated", newDate);
-  },
-  { deep: true }
-);
+const emit = defineEmits(["update:date"]);
 </script>
 
 <script lang="ts">

@@ -52,8 +52,6 @@ describe("App", () => {
       // Couldn't get these to work!!
       const spySaveMethod = jest.spyOn(wrapper.vm, "save");
       const spyValidateDatesMethod = jest.spyOn(wrapper.vm, "validateDates");
-      const spySetStartDateTime = jest.spyOn(wrapper.vm, "setStartDateTime");
-      const spyEndStartDateTime = jest.spyOn(wrapper.vm, "setEndDateTime");
 
       wrapper.vm.validateDates = spyValidateDatesMethod;
       wrapper.vm.save = spySaveMethod;
@@ -61,8 +59,9 @@ describe("App", () => {
       wrapper.vm.markers.push(startLoc);
       wrapper.vm.markers.push(endLoc);
 
-      wrapper.vm.setStartDateTime(startDateTime);
-      wrapper.vm.setEndDateTime(endDateTime);
+      wrapper.vm.startDateTime = startDateTime;
+      wrapper.vm.endDateTime = endDateTime;
+      wrapper.vm.validateDates();
 
       // Act
       await wrapper.find('[data-testid="save-button"]').trigger("click");
@@ -72,9 +71,6 @@ describe("App", () => {
         expectedStartValidationState
       );
       expect(wrapper.vm.endValidationState).toEqual(expectedEndValidationState);
-
-      // This should work
-      //expect(spyValidateDatesMethod).toHaveBeenCalledTimes(2);
     }
   );
 });
